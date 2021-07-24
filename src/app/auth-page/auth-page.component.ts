@@ -28,7 +28,7 @@ export class AuthPageComponent implements OnInit {
   secondFormGroup: FormGroup;
   thirdFormGroup: FormGroup;
   isEditable = true;
-  isLinear = true;
+  isLinear = false;
 
   mudancasNaoSalvas: boolean;
 

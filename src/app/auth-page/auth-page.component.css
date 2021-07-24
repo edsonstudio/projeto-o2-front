@@ -18,11 +18,6 @@
   width: 80%;
 }
 
-.example-header-image {
-  background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
-  background-size: cover;
-}
-
 .center-content {
   display: flex;
   flex-direction: row;
@@ -33,6 +28,11 @@
 .mat-raised-button {
   margin-top: 10px;
   width: 80%;
+}
+
+.menor{
+  width: 25%;
+  margin: 10px;
 }
 
 .mat-card-header {
@@ -53,11 +53,6 @@
   padding-top: 10px;
   margin: auto;
   border: 1px solid grey;
-  /* text-align: left; */
-}
-
-.mat-stepper-horizontal {
-  margin-top: 8px;
 }
 
 .mat-form-field {
