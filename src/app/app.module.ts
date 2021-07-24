@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthPageComponent } from './auth-page/auth-page.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button';
@@ -17,6 +18,11 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatSelectModule} from '@angular/material/select';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatStepperModule} from '@angular/material/stepper';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+
+import { NgBrazil } from 'ng-brazil'
+import { TextMaskModule } from 'angular2-text-mask';
+import { CustomFormsModule } from 'ng2-validation'
 
 @NgModule({
   declarations: [
@@ -37,7 +43,13 @@ import {MatStepperModule} from '@angular/material/stepper';
     MatFormFieldModule,
     MatSelectModule,
     MatDividerModule,
-    MatStepperModule
+    MatStepperModule,
+    MatCheckboxModule,
+    FormsModule,
+    ReactiveFormsModule,
+    NgBrazil,
+    TextMaskModule,
+    CustomFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
