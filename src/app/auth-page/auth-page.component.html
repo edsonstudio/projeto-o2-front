@@ -1,1 +1,193 @@
-<p>auth-page works!</p>
+<div class="center-content">
+  <mat-card class="example-card">
+    <mat-card-header>
+      <mat-card-title>Projeto O<sub><small>2</small></sub></mat-card-title>
+      <mat-card-subtitle>Login / Cadastro</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+
+      <mat-tab-group mat-align-tabs="center">
+        <mat-tab label="Login">
+
+          <mat-form-field class="example-full-width">
+            <mat-label>E-mail</mat-label>
+            <input matInput type="email" placeholder="exemplo@exemplo.com" value="">
+            <button mat-icon-button matSuffix>
+              <mat-icon>alternate_email</mat-icon>
+            </button>
+          </mat-form-field>
+
+          <mat-form-field class="example-full-width">
+            <mat-label>Senha</mat-label>
+            <input matInput [type]="hide ? 'password' : 'text'">
+            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+              [attr.aria-pressed]="hide">
+              <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+          </mat-form-field>
+
+          <button mat-raised-button color="primary">Entrar</button>
+        </mat-tab>
+
+        <!--------------------------------------------------------Cadastro-------------------------------------------------------->
+
+        <mat-tab label="Cadastro">
+
+          <mat-tab-group mat-align-tabs="center">
+
+
+            <!-----------------------------------------------Dados Pessoais----------------------------------------------->
+            <mat-tab label="Dados pessoais">
+              <div class="example-table-container">
+                <mat-form-field class="example-full-width">
+                  <mat-label>Nome</mat-label>
+                  <input matInput type="text" placeholder="Digite o seu nome" value="">
+                </mat-form-field>
+
+                <mat-form-field class="example-full-width">
+                  <mat-label>Telefone</mat-label>
+                  <input matInput type="text" placeholder="Digite o seu nome" value="">
+                  <mat-icon matSuffix>phone</mat-icon>
+                  <mat-hint>Inclua o código de área (DDD)</mat-hint>
+                </mat-form-field>
+
+                <mat-form-field class="example-full-width">
+                  <mat-label>Data de nascimento</mat-label>
+                  <input matInput [matDatepicker]="picker">
+                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                  <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+
+                <mat-form-field class="example-full-width">
+                  <mat-label>Gênero</mat-label>
+                  <input matInput type="text" placeholder="Digite o seu nome" value="">
+                </mat-form-field>
+
+                <mat-form-field class="example-full-width">
+                  <mat-label>E-mail</mat-label>
+                  <input matInput type="email" placeholder="exemplo@exemplo.com" value="">
+                  <button mat-icon-button matSuffix>
+                    <mat-icon>alternate_email</mat-icon>
+                  </button>
+                </mat-form-field>
+
+                <mat-form-field class="example-full-width">
+                  <mat-label>Senha</mat-label>
+                  <input matInput [type]="hide ? 'password' : 'text'">
+                  <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                    [attr.aria-pressed]="hide">
+                    <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                  </button>
+                </mat-form-field>
+
+                <mat-form-field class="example-full-width">
+                  <mat-label>Confirme a Senha</mat-label>
+                  <input matInput [type]="hide ? 'password' : 'text'">
+                  <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                    [attr.aria-pressed]="hide">
+                    <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                  </button>
+                </mat-form-field>
+
+                <button mat-raised-button color="primary">Proximo</button>
+              </div>
+            </mat-tab>
+
+            <!-----------------------------------------------Dados Profissionais----------------------------------------------->
+            <mat-tab label="Dados Profissionais">
+              <div class="example-table-container">
+
+                <mat-form-field class="example-full-width">
+                  <mat-label>Profissão</mat-label>
+                  <input matInput type="text" placeholder="Digite a sua profissão" value="">
+                </mat-form-field>
+
+                <mat-form-field class="example-full-width">
+                  <mat-label>Número de registro</mat-label>
+                  <input matInput type="text" placeholder="Digite o seu número de registro" value="">
+                </mat-form-field>
+
+                <mat-form-field class="example-full-width">
+                  <mat-label>Área de atuação</mat-label>
+                  <mat-select>
+                    <mat-option value="one">Médico(a)</mat-option>
+                    <mat-option value="two">Enfermeiro(a)</mat-option>
+                    <mat-option value="three">Fonoaudiologo(a)</mat-option>
+                    <mat-option value="four">Técnico(a) de Enfermagem</mat-option>
+                  </mat-select>
+                </mat-form-field>
+
+                <h3>Deslocamento máximo por dia:</h3>
+
+                <mat-form-field class="example-full-width">
+                  <mat-label>Em quilômetros</mat-label>
+                  <input matInput type="number" placeholder="Ex. 5" min="1">
+                  <span matSuffix>Km</span>
+                </mat-form-field>
+
+                <mat-form-field class="example-full-width">
+                  <mat-label>Por cidade</mat-label>
+                  <mat-select>
+                    <mat-option value="one">Recife</mat-option>
+                    <mat-option value="two">Olinda</mat-option>
+                    <mat-option value="three">Jaboatão</mat-option>
+                    <mat-option value="four">Paulista</mat-option>
+                  </mat-select>
+                </mat-form-field>
+
+                <button mat-raised-button color="primary">Cadastrar</button>
+              </div>
+            </mat-tab>
+
+            <!-----------------------------------------------Localidade----------------------------------------------->
+            <mat-tab label="Localidade">
+              <div class="example-table-container">
+
+                <mat-form-field class="example-full-width">
+                  <mat-label>CEP</mat-label>
+                  <input matInput type="text" placeholder="Digite o seu nome" value="">
+                </mat-form-field>
+
+                <mat-form-field class="example-full-width">
+                  <mat-label>Logradouro</mat-label>
+                  <input matInput type="text" placeholder="Digite o seu nome" value="">
+                </mat-form-field>
+
+                <mat-form-field class="example-full-width">
+                  <mat-label>Número</mat-label>
+                  <input matInput type="text" placeholder="Digite o seu nome" value="">
+                </mat-form-field>
+
+                <mat-form-field class="example-full-width">
+                  <mat-label>Complemento</mat-label>
+                  <input matInput type="text" placeholder="Digite o seu nome" value="">
+                </mat-form-field>
+
+                <mat-form-field class="example-full-width">
+                  <mat-label>Bairro</mat-label>
+                  <input matInput type="text" placeholder="Digite o seu nome" value="">
+                </mat-form-field>
+
+                <mat-form-field class="example-full-width">
+                  <mat-label>Cidade</mat-label>
+                  <input matInput type="text" placeholder="Digite o seu nome" value="">
+                </mat-form-field>
+
+                <mat-form-field class="example-full-width">
+                  <mat-label>Estado</mat-label>
+                  <input matInput type="text" placeholder="Digite o seu nome" value="">
+                </mat-form-field>
+
+                <button mat-raised-button color="primary">Cadastrar</button>
+              </div>
+            </mat-tab>
+          </mat-tab-group>
+
+
+
+        </mat-tab>
+      </mat-tab-group>
+
+    </mat-card-content>
+  </mat-card>
+</div>
