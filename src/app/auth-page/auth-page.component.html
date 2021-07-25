@@ -11,7 +11,7 @@
 
           <mat-form-field class="example-full-width">
             <mat-label>E-mail</mat-label>
-            <input matInput type="email" placeholder="exemplo@exemplo.com" value="">
+            <input matInput type="email" placeholder="exemplo@exemplo.com">
             <button mat-icon-button matSuffix>
               <mat-icon>alternate_email</mat-icon>
             </button>
@@ -32,146 +32,252 @@
         <!--------------------------------------------------------Cadastro-------------------------------------------------------->
 
         <mat-tab label="Cadastro">
+          <form (ngSubmit)='adicionarUsuario()' [formGroup]="usuarioForm">
 
-          <form (ngSubmit)='adicionarUsuario()' [formGroup]="firstFormGroup">
           <div class="example-table-container">
-          <mat-vertical-stepper [linear]="isLinear" #stepper>
-<!-----------------------------------------------Dados Pessoais----------------------------------------------->
-            <mat-step [stepControl]="firstFormGroup" [editable]="isEditable">
-              <form [formGroup]="firstFormGroup">
-                <ng-template matStepLabel>Dados pessoais</ng-template>
+            <mat-vertical-stepper [linear]="isLinear" #stepper>
+                <!-----------------------------------------------Dados Pessoais----------------------------------------------->
+                <mat-step [stepControl]="usuarioForm" [editable]="isEditable">
+                  <form [formGroup]="usuarioForm">
+                    <ng-template matStepLabel>Dados pessoais</ng-template>
 
-                <mat-form-field class="example-full-width">
-                  <mat-label>Nome</mat-label>
-                  <input matInput formControlName="nome" placeholder="Digite o seu nome completo" required>
-                  <mat-hint>*Campo obrigatório</mat-hint>
-                  <mat-error *ngIf="displayMessage.nome">
-                    <p [innerHTML]="displayMessage.nome"></p>
-                  </mat-error>
-                </mat-form-field>
+                    <mat-form-field class="example-full-width">
+                      <mat-label>Nome</mat-label>
+                      <input matInput formControlName="name" placeholder="Digite o seu nome completo" required>
+                      <mat-hint>*Campo obrigatório</mat-hint>
+                      <mat-error *ngIf="displayMessage.name">
+                        <p [innerHTML]="displayMessage.name"></p>
+                      </mat-error>
+                    </mat-form-field>
 
-                <mat-form-field class="example-full-width">
-                  <mat-label>Telefone</mat-label>
-                  <input matInput formControlName="telefone" placeholder="Digite o seu telefone" telefone
-                  [textMask]="{mask: MASKS.telefone.textMask}" required>
-                  <mat-icon matSuffix>phone</mat-icon>
-                  <mat-hint>*Campo obrigatório / Inclua o código de área (DDD)</mat-hint>
-                  <mat-error *ngIf="displayMessage.telefone">
-                    <p [innerHTML]="displayMessage.telefone"></p>
-                  </mat-error>
-                </mat-form-field>
+                    <mat-form-field class="example-full-width">
+                      <mat-label>Telefone</mat-label>
+                      <input matInput formControlName="phoneNumber" placeholder="Digite o seu telefone" telefone
+                        [textMask]="{mask: MASKS.telefone.textMask}" required>
+                      <mat-icon matSuffix>phone</mat-icon>
+                      <mat-hint>*Campo obrigatório / Inclua o código de área (DDD)</mat-hint>
+                      <mat-error *ngIf="displayMessage.phoneNumber">
+                        <p [innerHTML]="displayMessage.phoneNumber"></p>
+                      </mat-error>
+                    </mat-form-field>
 
-                <mat-form-field class="example-full-width">
-                  <mat-label>Data de nascimento</mat-label>
-                  <input matInput formControlName="dataNascimento" [matDatepicker]="picker" placeholder="Digite ou selecione a data" required>
-                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                  <mat-datepicker #picker></mat-datepicker>
-                  <mat-hint>*Campo obrigatório</mat-hint>
-                  <mat-error *ngIf="displayMessage.dataNascimento">
-                    <p [innerHTML]="displayMessage.dataNascimento"></p>
-                  </mat-error>
-                </mat-form-field>
+                    <mat-form-field class="example-full-width">
+                      <mat-label>Data de nascimento</mat-label>
+                      <input matInput formControlName="dataNascimento" [matDatepicker]="picker"
+                        placeholder="Digite ou selecione a data" required>
+                      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                      <mat-datepicker #picker></mat-datepicker>
+                      <mat-hint>*Campo obrigatório</mat-hint>
+                      <mat-error *ngIf="displayMessage.dataNascimento">
+                        <p [innerHTML]="displayMessage.dataNascimento"></p>
+                      </mat-error>
+                    </mat-form-field>
 
-                <mat-form-field class="example-full-width">
-                  <mat-label>Gênero</mat-label>
-                  <input matInput formControlName="genero" placeholder="Digite o seu gênero" required>
-                  <mat-hint>*Campo obrigatório</mat-hint>
-                  <mat-error *ngIf="displayMessage.genero">
-                    <p [innerHTML]="displayMessage.genero"></p>
-                  </mat-error>
-                </mat-form-field>
+                    <mat-form-field class="example-full-width">
+                      <mat-label>Gênero</mat-label>
+                      <input matInput formControlName="genero" placeholder="Digite o seu gênero" required>
+                      <mat-hint>*Campo obrigatório</mat-hint>
+                      <mat-error *ngIf="displayMessage.genero">
+                        <p [innerHTML]="displayMessage.genero"></p>
+                      </mat-error>
+                    </mat-form-field>
 
-                <mat-form-field class="example-full-width">
-                  <mat-label>E-mail</mat-label>
-                  <input matInput type="email" formControlName="email" placeholder="Digite o seu email" required>
-                  <button mat-icon-button matSuffix>
-                    <mat-icon>alternate_email</mat-icon>
-                  </button>
-                  <mat-hint>*Campo obrigatório</mat-hint>
-                  <mat-error *ngIf="displayMessage.email">
-                    <p [innerHTML]="displayMessage.email"></p>
-                  </mat-error>
-                </mat-form-field>
+                    <mat-form-field class="example-full-width">
+                      <mat-label>E-mail</mat-label>
+                      <input matInput type="email" formControlName="email" placeholder="Digite o seu email" required>
+                      <button mat-icon-button matSuffix>
+                        <mat-icon>alternate_email</mat-icon>
+                      </button>
+                      <mat-hint>*Campo obrigatório</mat-hint>
+                      <mat-error *ngIf="displayMessage.email">
+                        <p [innerHTML]="displayMessage.email"></p>
+                      </mat-error>
+                    </mat-form-field>
 
-                <mat-form-field class="example-full-width">
-                  <mat-label>Senha</mat-label>
-                  <input matInput [type]="hide ? 'password' : 'text'" formControlName="senha">
-                  <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
-                    [attr.aria-pressed]="hide">
-                    <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-                  </button>
-                  <mat-hint>*Campo obrigatório</mat-hint>
-                  <mat-error *ngIf="displayMessage.senha">
-                    <p [innerHTML]="displayMessage.senha"></p>
-                  </mat-error>
-                </mat-form-field>
+                    <mat-form-field class="example-full-width">
+                      <mat-label>Senha</mat-label>
+                      <input matInput [type]="hide ? 'password' : 'text'" formControlName="password">
+                      <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                        [attr.aria-pressed]="hide">
+                        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                      </button>
+                      <mat-hint>*Campo obrigatório</mat-hint>
+                      <mat-error *ngIf="displayMessage.password">
+                        <p [innerHTML]="displayMessage.password"></p>
+                      </mat-error>
+                    </mat-form-field>
 
-                <mat-form-field class="example-full-width">
-                  <mat-label>Confirme a Senha</mat-label>
-                  <input matInput [type]="hide ? 'password' : 'text'" formControlName="senhaConfirm">
-                  <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
-                    [attr.aria-pressed]="hide">
-                    <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-                  </button>
-                  <mat-hint>*Campo obrigatório</mat-hint>
-                  <mat-error *ngIf="displayMessage.senhaConfirm">
-                    <p [innerHTML]="displayMessage.senhaConfirm"></p>
-                  </mat-error>
-                </mat-form-field>
-                <br><br>
+                    <mat-form-field class="example-full-width">
+                      <mat-label>Confirme a Senha</mat-label>
+                      <input matInput [type]="hide ? 'password' : 'text'" formControlName="confirmPassword">
+                      <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                        [attr.aria-pressed]="hide">
+                        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                      </button>
+                      <mat-hint>*Campo obrigatório</mat-hint>
+                      <mat-error *ngIf="displayMessage.confirmPassword">
+                        <p [innerHTML]="displayMessage.confirmPassword"></p>
+                      </mat-error>
+                    </mat-form-field>
+                    <br><br>
 
-                <div>
-                  <button button mat-raised-button color="primary"matStepperNext>Próximo</button>
-                </div>
-              </form>
-            </mat-step>
-            <!-----------------------------------------------Dados Profissionais----------------------------------------------->
-            <!-- <mat-step [stepControl]="secondFormGroup" [editable]="isEditable">
-              <form [formGroup]="secondFormGroup">
-                <ng-template matStepLabel>Dados profissionais</ng-template>
-                <mat-form-field>
-                  <mat-label>Profissão</mat-label>
-                  <input matInput formControlName="profissao" placeholder="Ex. 1 Main St, New York, NY"
-                  required>
-                </mat-form-field>
-                <div>
-                  <button mat-button matStepperPrevious>Back</button>
-                  <button mat-button matStepperNext>Next</button>
-                </div>
-              </form>
-            </mat-step> -->
-            <!-----------------------------------------------Localidade----------------------------------------------->
-            <!-- <mat-step [stepControl]="thirdFormGroup" [editable]="isEditable">
-              <form [formGroup]="thirdFormGroup">
-                <ng-template matStepLabel>Localidade</ng-template>
-                <mat-form-field>
-                  <mat-label>CEP</mat-label>
-                  <input matInput formControlName="cep" cep [textMask]="{mask: MASKS.cep.textMask}" placeholder="Digite o seu CEP"
-                  required>
-                </mat-form-field>
-                <div>
-                  <button mat-button matStepperPrevious>Back</button>
-                  <button mat-button matStepperNext>Next</button>
-                </div>
-              </form>
-            </mat-step> -->
-            <!-----------------------------------------------Concluir----------------------------------------------->
-            <mat-step>
-              <ng-template matStepLabel>Concluir</ng-template>
-              <p>Formulario valido: {{ firstFormGroup.valid }}</p>
-              <p>Formulario tocado: {{ firstFormGroup.touched }}</p>
-              <p>Formulario sujo: {{ firstFormGroup.dirty }}</p>
-              <p>Formulario: {{ formResult }}</p>
-              <div>
-                <button mat-raised-button color="primary" [disabled]="!firstFormGroup.valid"
-                    type="submit">Registrar</button><br>
-                <button class="menor" mat-raised-button matStepperPrevious>Back</button>
-                <button class="menor" mat-raised-button color="warn" (click)="stepper.reset()">Reset</button>
-              </div>
-            </mat-step>
-          </mat-vertical-stepper>
-        </div>
-      </form>
+                    <div>
+                      <button button mat-raised-button color="primary" matStepperNext>Próximo</button>
+                    </div>
+                  </form>
+                </mat-step>
+                <!-----------------------------------------------Dados Profissionais----------------------------------------------->
+                <mat-step [stepControl]="dadosProfissionais" [editable]="isEditable">
+                  <div formGroupName="dadosProfissionais">
+                    <ng-template matStepLabel>Dados profissionais</ng-template>
+
+                    <mat-form-field class="example-full-width">
+                      <mat-label>Profissão</mat-label>
+                      <input matInput formControlName="profissao" placeholder="Digite a sua profissão" required>
+                      <mat-hint>*Campo obrigatório</mat-hint>
+                      <mat-error *ngIf="displayMessage.profissao">
+                        <p [innerHTML]="displayMessage.profissao"></p>
+                      </mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field class="example-full-width">
+                      <mat-label>Número de registro</mat-label>
+                      <input type="number" matInput formControlName="numeroRegistro" placeholder="Digite o seu número de registro"
+                        required>
+                      <mat-hint>*Campo obrigatório</mat-hint>
+                      <mat-error *ngIf="displayMessage.numeroRegistro">
+                        <p [innerHTML]="displayMessage.numeroRegistro"></p>
+                      </mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field class="example-full-width">
+                      <mat-label>Área de atuação</mat-label>
+                      <mat-select formControlName="areaAtuacao" placeholder="Escolha a sua área de atuação" required>
+                        <mat-option value="1">Médico(a)</mat-option>
+                        <mat-option value="2">Enfermeiro(a)</mat-option>
+                        <mat-option value="3">Fonoaudiologo(a)</mat-option>
+                        <mat-option value="4">Técnico(a) de Enfermagem</mat-option>
+                      </mat-select>
+                      <mat-hint>*Campo obrigatório</mat-hint>
+                      <mat-error *ngIf="displayMessage.areaAtuacao">
+                        <p [innerHTML]="displayMessage.areaAtuacao"></p>
+                      </mat-error>
+                    </mat-form-field>
+
+                    <h3>Deslocamento máximo por dia:</h3>
+
+                    <mat-form-field class="example-full-width">
+                      <mat-label>Em quilômetros ou cidades</mat-label>
+                      <textarea matInput formControlName="deslocamentoMaximo"
+                        placeholder="Informe o seu deslocamento máximo em quilômetros ou por cidade"
+                        required></textarea>
+                      <mat-hint>*Campo obrigatório</mat-hint>
+                      <mat-error *ngIf="displayMessage.deslocamentoMaximo">
+                        <p [innerHTML]="displayMessage.deslocamentoMaximo"></p>
+                      </mat-error>
+                    </mat-form-field>
+
+                    <div>
+                      <button class="menor" mat-raised-button matStepperPrevious>Voltar</button>
+                      <button class="menor" mat-raised-button color="primary" matStepperNext>Próximo</button>
+                    </div>
+
+                    <!-- ---------------------------------------------Localidade--------------------------------------------->
+                <mat-step [stepControl]="localidade" [editable]="isEditable">
+                  <div formGroupName="localidade">
+                    <ng-template matStepLabel>Localidade</ng-template>
+
+                    <mat-form-field class="example-full-width">
+                      <mat-label>CEP</mat-label>
+                      <input matInput formControlName="cep" (blur)="buscarCep($event.target.value)" cep
+                        [textMask]="{mask: MASKS.cep.textMask}" placeholder="Digite o seu CEP" required>
+                      <mat-hint>*Campo obrigatório</mat-hint>
+                      <mat-error *ngIf="displayMessage.cep">
+                        <p [innerHTML]="displayMessage.cep"></p>
+                      </mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field class="example-full-width">
+                      <mat-label>Logradouro</mat-label>
+                      <input matInput formControlName="logradouro" placeholder="Digite o seu logradouro" required>
+                      <mat-hint>*Campo obrigatório</mat-hint>
+                      <mat-error *ngIf="displayMessage.logradouro">
+                        <p [innerHTML]="displayMessage.logradouro"></p>
+                      </mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field class="example-full-width">
+                      <mat-label>Número</mat-label>
+                      <input matInput formControlName="numero" placeholder="Digite o número" required>
+                      <mat-hint>*Campo obrigatório</mat-hint>
+                      <mat-error *ngIf="displayMessage.numero">
+                        <p [innerHTML]="displayMessage.numero"></p>
+                      </mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field class="example-full-width">
+                      <mat-label>Complemento</mat-label>
+                      <input matInput formControlName="complemento" placeholder="Digite o complemento">
+                    </mat-form-field>
+
+                    <mat-form-field class="example-full-width">
+                      <mat-label>Bairro</mat-label>
+                      <input matInput formControlName="bairro" placeholder="Digite o seu bairro" required>
+                      <mat-hint>*Campo obrigatório</mat-hint>
+                      <mat-error *ngIf="displayMessage.bairro">
+                        <p [innerHTML]="displayMessage.bairro"></p>
+                      </mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field class="example-full-width">
+                      <mat-label>Cidade</mat-label>
+                      <input matInput formControlName="cidade" placeholder="Digite a sua cidade" required>
+                      <mat-hint>*Campo obrigatório</mat-hint>
+                      <mat-error *ngIf="displayMessage.cidade">
+                        <p [innerHTML]="displayMessage.cidade"></p>
+                      </mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field class="example-full-width">
+                      <mat-label>Estado</mat-label>
+                      <input matInput formControlName="estado" placeholder="Digite o seu estado" required>
+                      <mat-hint>*Campo obrigatório</mat-hint>
+                      <mat-error *ngIf="displayMessage.estado">
+                        <p [innerHTML]="displayMessage.estado"></p>
+                      </mat-error>
+                    </mat-form-field>
+
+                    <div>
+                      <button class="menor" mat-raised-button matStepperPrevious>Voltar</button>
+                      <button class="menor" mat-raised-button color="primary" matStepperNext>Próximo</button>
+                    </div>
+                  </div>
+                </mat-step>
+
+                  </div>
+                </mat-step>
+
+                <!-----------------------------------------------Concluir----------------------------------------------->
+                <mat-step>
+                  <ng-template matStepLabel>Concluir</ng-template>
+
+                  <div>
+                    <button class="menor" mat-raised-button matStepperPrevious>Voltar</button>
+                    <button class="menor" mat-raised-button color="warn" (click)="stepper.reset()">Resetar</button>
+                    <br>
+                    <button mat-raised-button color="primary" [disabled]="!usuarioForm.valid"
+                    type="submit">Registrar</button>
+                  </div>
+                  <div>
+                    <p>Formulario valido: {{ usuarioForm.valid }}</p>
+                    <p>Formulario tocado: {{ usuarioForm.touched }}</p>
+                    <p>Formulario sujo: {{ usuarioForm.dirty }}</p>
+                    <p>Formulario: {{ formResult }}</p>
+                  </div>
+                </mat-step>
+              </mat-vertical-stepper>
+            </div>
+          </form>
 
         </mat-tab>
       </mat-tab-group>

@@ -9,6 +9,7 @@ export class Usuario {
   email: string;
   password: string;
   confirmPassword: string;
+  dadosProfissionais: DadosProfissionais;
 }
 
 export class DadosProfissionais {

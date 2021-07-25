@@ -27,11 +27,11 @@
 
 .mat-raised-button {
   margin-top: 10px;
-  width: 80%;
+  width: 52%;
 }
 
 .menor{
-  width: 25%;
+  width: 30%;
   margin: 10px;
 }
 
@@ -58,7 +58,6 @@
 .mat-form-field {
   margin-top: 16px;
 }
-
 
 .mat-stepper-vertical {
   margin-top: 8px;

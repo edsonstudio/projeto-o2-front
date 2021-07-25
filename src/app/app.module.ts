@@ -1,11 +1,13 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { RouterModule } from '@angular/router';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthPageComponent } from './auth-page/auth-page.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 
 import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button';
@@ -23,6 +25,9 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import { NgBrazil } from 'ng-brazil'
 import { TextMaskModule } from 'angular2-text-mask';
 import { CustomFormsModule } from 'ng2-validation'
+import { ToastrModule } from 'ngx-toastr';
+
+import { UserService } from './auth-page/services/user.service';
 
 @NgModule({
   declarations: [
@@ -49,9 +54,17 @@ import { CustomFormsModule } from 'ng2-validation'
     ReactiveFormsModule,
     NgBrazil,
     TextMaskModule,
-    CustomFormsModule
+    CustomFormsModule,
+    ToastrModule.forRoot({
+      positionClass: 'toast-top-right',
+      progressAnimation: 'decreasing',
+      progressBar: true,
+      closeButton: true
+    }),
+    HttpClientModule,
+    RouterModule
   ],
-  providers: [],
+  providers: [UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
