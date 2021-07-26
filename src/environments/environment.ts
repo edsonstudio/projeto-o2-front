@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiUrlV1: 'https://projeto-o2-final.azurewebsites.net/api/v1/'
+  apiUrlV1: 'https://localhost:5001/api/v1/'
 };
 
 /*

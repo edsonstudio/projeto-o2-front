@@ -7,7 +7,7 @@ export class Localidade {
   cep: string;
   cidade: string;
   estado: string;
-  fornecedorId: string;
+  dadosProfissionaisId: string;
 }
 
 export class CepConsulta {

@@ -18,5 +18,6 @@ export class DadosProfissionais {
   numeroRegistro: number;
   areaAtuacao: number;
   deslocamentoMaximo: string;
+  userId: string;
   localidade: Localidade;
 }

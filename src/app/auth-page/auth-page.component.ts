@@ -82,7 +82,8 @@ export class AuthPageComponent implements OnInit, AfterViewInit {
         required: 'Informe o seu número de registro'
       },
       areaAtuacao: {
-        required: 'Informe a sua área de atuação'
+        required: 'Informe a sua área de atuação',
+        rangeLength: 'A area de atuação deve possuir entre 1 e 18 caracteres'
       },
       deslocamentoMaximo: {
         required: 'Informe o seu deslocamento máximo'
@@ -127,7 +128,7 @@ export class AuthPageComponent implements OnInit, AfterViewInit {
       dadosProfissionais: this._formBuilder.group({
         profissao: ['', Validators.required],
         numeroRegistro: ['', Validators.required],
-        areaAtuacao: ['', Validators.required],
+        areaAtuacao: ['', [Validators.required, CustomValidators.rangeLength([1, 18])]],
         deslocamentoMaximo: ['', Validators.required],
 
         localidade: this._formBuilder.group({
@@ -166,15 +167,13 @@ export class AuthPageComponent implements OnInit, AfterViewInit {
 
   preencherEnderecoConsulta(cepConsulta: CepConsulta) {
     this.usuarioForm.patchValue({
-      dadosProfissionais: {
 
-        localidade: {
-          logradouro: cepConsulta.logradouro,
-          bairro: cepConsulta.bairro,
-          cep: cepConsulta.cep,
-          cidade: cepConsulta.localidade,
-          estado: cepConsulta.uf
-        }
+      localidade: {
+        logradouro: cepConsulta.logradouro,
+        bairro: cepConsulta.bairro,
+        cep: cepConsulta.cep,
+        cidade: cepConsulta.localidade,
+        estado: cepConsulta.uf
       }
     });
   }
