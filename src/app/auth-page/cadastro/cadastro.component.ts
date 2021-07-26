@@ -1,20 +1,21 @@
-import { AuthService } from './services/auth.service';
+import { AuthService } from '../services/auth.service';
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChildren } from '@angular/core';
 import { FormBuilder, Validators, FormGroup, FormControlName, FormControl } from '@angular/forms';
 import { MASKS, NgBrazilValidators } from 'ng-brazil';
 import { CustomValidators } from 'ng2-validation';
-import { Usuario } from './models/usuario';
+import { Usuario } from '../models/usuario';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { CepConsulta } from './models/localidade';
-import { StringUtils } from '../utils/string-utils';
-import { FormBaseComponent } from '../base-components/form-base.component';
+import { CepConsulta } from '../models/localidade';
+import { StringUtils } from '../../utils/string-utils';
+import { FormBaseComponent } from '../../base-components/form-base.component';
+
 @Component({
-  selector: 'app-auth-page',
-  templateUrl: './auth-page.component.html',
-  styleUrls: ['./auth-page.component.css']
+  selector: 'app-cadastro',
+  templateUrl: './cadastro.component.html',
+  styleUrls: ['./cadastro.component.css']
 })
-export class AuthPageComponent extends FormBaseComponent implements OnInit, AfterViewInit {
+export class CadastroComponent extends FormBaseComponent implements OnInit, AfterViewInit {
 
   @ViewChildren(FormControlName, { read: ElementRef }) formInputElements: ElementRef[];
 
@@ -143,7 +144,6 @@ export class AuthPageComponent extends FormBaseComponent implements OnInit, Afte
         })
       })
     });
-
   }
 
   ngAfterViewInit(): void {
@@ -173,7 +173,6 @@ export class AuthPageComponent extends FormBaseComponent implements OnInit, Afte
         }
       }
     });
-
   }
 
   adicionarUsuario() {
@@ -214,6 +213,4 @@ export class AuthPageComponent extends FormBaseComponent implements OnInit, Afte
     this.toastr.error('Ocorreu um erro !!!', 'Eita :O');
     console.log('ERROSSSSSS: ', this.errors)
   }
-
-
 }

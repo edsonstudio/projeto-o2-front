@@ -31,11 +31,15 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 
 // ---------------Componentes de terceiros---------------
 import { TextMaskModule } from 'angular2-text-mask';
+import { CadastroComponent } from './cadastro/cadastro.component';
+import { LoginComponent } from './login/login.component';
 
 
 @NgModule({
   declarations: [
-    AuthPageComponent
+    AuthPageComponent,
+    CadastroComponent,
+    LoginComponent
   ],
   imports: [
     BrowserAnimationsModule,
