@@ -172,13 +172,15 @@ export class AuthPageComponent implements OnInit, AfterViewInit {
   }
 
   preencherEnderecoConsulta(cepConsulta: CepConsulta) {
-    this.dadosProfissionais.patchValue({
-      localidade: {
-        logradouro: cepConsulta.logradouro,
-        bairro: cepConsulta.bairro,
-        cep: cepConsulta.cep,
-        cidade: cepConsulta.localidade,
-        estado: cepConsulta.uf
+    this.usuarioForm.patchValue({
+      dadosProfissionais:{
+        localidade: {
+          logradouro: cepConsulta.logradouro,
+          bairro: cepConsulta.bairro,
+          cep: cepConsulta.cep,
+          cidade: cepConsulta.localidade,
+          estado: cepConsulta.uf
+        }
       }
     });
 
