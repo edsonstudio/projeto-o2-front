@@ -5,11 +5,12 @@ import { ValidationMessages, GenericValidator, DisplayMessage } from './generic-
 import { MASKS, NgBrazilValidators } from 'ng-brazil';
 import { CustomValidators } from 'ng2-validation';
 import { fromEvent, merge, Observable } from 'rxjs';
-import { Usuario } from './models/usuario';
+import { Usuario, DadosProfissionais } from './models/usuario';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { CepConsulta } from './models/localidade';
 import { StringUtils } from '../utils/string-utils';
+import { Localidade } from './models/localidade';
 @Component({
   selector: 'app-auth-page',
   templateUrl: './auth-page.component.html',
@@ -20,7 +21,10 @@ export class AuthPageComponent implements OnInit, AfterViewInit {
   @ViewChildren(FormControlName, { read: ElementRef }) formInputElements: ElementRef[];
 
   hide = true;
-  usuario: Usuario;
+
+  usuario: Usuario = new Usuario();
+  // dadosProfissionais: DadosProfissionais = new DadosProfissionais();
+  // localidade: Localidade = new Localidade();
 
   validationMessages: ValidationMessages;
 	genericValidator: GenericValidator;
@@ -29,8 +33,8 @@ export class AuthPageComponent implements OnInit, AfterViewInit {
 	MASKS = MASKS;
 
   public usuarioForm: FormGroup;
-  dadosProfissionais: FormGroup;
-  localidade: FormGroup;
+  public dadosProfissionais: FormGroup;
+  public localidade: FormGroup;
 
   isEditable = true;
   isLinear = false; //não esquecer de deixar como true
@@ -168,8 +172,7 @@ export class AuthPageComponent implements OnInit, AfterViewInit {
   }
 
   preencherEnderecoConsulta(cepConsulta: CepConsulta) {
-    this.usuarioForm.patchValue({
-
+    this.dadosProfissionais.patchValue({
       localidade: {
         logradouro: cepConsulta.logradouro,
         bairro: cepConsulta.bairro,
@@ -178,6 +181,7 @@ export class AuthPageComponent implements OnInit, AfterViewInit {
         estado: cepConsulta.uf
       }
     });
+
   }
 
   adicionarUsuario() {
