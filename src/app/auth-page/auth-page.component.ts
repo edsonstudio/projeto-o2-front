@@ -79,11 +79,11 @@ export class AuthPageComponent implements OnInit, AfterViewInit {
         required: 'Informe a sua profissão'
       },
       numeroRegistro: {
-        required: 'Informe o seu número de registro'
+        required: 'Informe o seu número de registro',
+        rangeLength: 'O número de registro deve possuir entre 1 e 18 caracteres'
       },
       areaAtuacao: {
-        required: 'Informe a sua área de atuação',
-        rangeLength: 'A area de atuação deve possuir entre 1 e 18 caracteres'
+        required: 'Informe a sua área de atuação'
       },
       deslocamentoMaximo: {
         required: 'Informe o seu deslocamento máximo'
@@ -127,8 +127,8 @@ export class AuthPageComponent implements OnInit, AfterViewInit {
 
       dadosProfissionais: this._formBuilder.group({
         profissao: ['', Validators.required],
-        numeroRegistro: ['', Validators.required],
-        areaAtuacao: ['', [Validators.required, CustomValidators.rangeLength([1, 18])]],
+        numeroRegistro: ['', [Validators.required, CustomValidators.rangeLength([1, 18])]],
+        areaAtuacao: ['', Validators.required],
         deslocamentoMaximo: ['', Validators.required],
 
         localidade: this._formBuilder.group({
