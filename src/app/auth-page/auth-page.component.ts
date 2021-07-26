@@ -1,7 +1,6 @@
 import { UserService } from './services/user.service';
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChildren } from '@angular/core';
 import { FormBuilder, Validators, FormGroup, FormControlName, FormControl } from '@angular/forms';
-import { ValidationMessages, GenericValidator, DisplayMessage } from './generic-form-validation';
 import { MASKS, NgBrazilValidators } from 'ng-brazil';
 import { CustomValidators } from 'ng2-validation';
 import { fromEvent, merge, Observable } from 'rxjs';
@@ -11,26 +10,24 @@ import { ToastrService } from 'ngx-toastr';
 import { CepConsulta } from './models/localidade';
 import { StringUtils } from '../utils/string-utils';
 import { Localidade } from './models/localidade';
+import { FormBaseComponent } from '../base-components/form-base.component';
 @Component({
   selector: 'app-auth-page',
   templateUrl: './auth-page.component.html',
   styleUrls: ['./auth-page.component.css']
 })
-export class AuthPageComponent implements OnInit, AfterViewInit {
+export class AuthPageComponent extends FormBaseComponent implements OnInit, AfterViewInit {
 
   @ViewChildren(FormControlName, { read: ElementRef }) formInputElements: ElementRef[];
 
   hide = true;
 
-  usuario: Usuario = new Usuario();
+  usuario: Usuario;
   // dadosProfissionais: DadosProfissionais = new DadosProfissionais();
   // localidade: Localidade = new Localidade();
 
-  validationMessages: ValidationMessages;
-	genericValidator: GenericValidator;
-	displayMessage: DisplayMessage = {};
   formResult: string = '';
-	MASKS = MASKS;
+  MASKS = MASKS;
 
   public usuarioForm: FormGroup;
   public dadosProfissionais: FormGroup;
@@ -47,38 +44,40 @@ export class AuthPageComponent implements OnInit, AfterViewInit {
     private router: Router,
     private toastr: ToastrService) {
 
+    super();
+
     this.validationMessages = {
-			name: {
-				required: 'O nome é requerido',
-				minlength: 'O nome precisa ter no mínimo 2 caracteres',
-				maxlength: 'O nome precisa ter no máximo 150 caracteres'
-			},
-			phoneNumber: {
-				required: 'O telefone é requerido',
-				minlength: 'O telefone precisa ter no mínimo 14 caracteres',
-				maxlength: 'O telefone precisa ter no máximo 15 caracteres'
-			},
-			dataNascimento: {
-				required: 'A data de nascimento é requerida'
-			},
-			genero: {
-				required: 'O gênero é requerido',
-				minlength: 'O gênero precisa ter no mínimo 2 caracteres',
-				maxlength: 'O gênero precisa ter no máximo 25 caracteres'
-			},
-			email: {
-				required: 'Informe o e-mail',
-				email: 'E-mail inválido'
-			},
-			password: {
-				required: 'Informe a senha',
-				rangeLength: 'A senha deve possuir entre 6 e 100 caracteres'
-			},
-			confirmPassword: {
-				required: 'Informe a senha novamente',
-				rangeLength: 'A senha deve possuir entre 6 e 100 caracteres',
-				equalTo: 'As senhas não conferem'
-			},
+      name: {
+        required: 'O nome é requerido',
+        minlength: 'O nome precisa ter no mínimo 2 caracteres',
+        maxlength: 'O nome precisa ter no máximo 150 caracteres'
+      },
+      phoneNumber: {
+        required: 'O telefone é requerido',
+        minlength: 'O telefone precisa ter no mínimo 14 caracteres',
+        maxlength: 'O telefone precisa ter no máximo 15 caracteres'
+      },
+      dataNascimento: {
+        required: 'A data de nascimento é requerida'
+      },
+      genero: {
+        required: 'O gênero é requerido',
+        minlength: 'O gênero precisa ter no mínimo 2 caracteres',
+        maxlength: 'O gênero precisa ter no máximo 25 caracteres'
+      },
+      email: {
+        required: 'Informe o e-mail',
+        email: 'E-mail inválido'
+      },
+      password: {
+        required: 'Informe a senha',
+        rangeLength: 'A senha deve possuir entre 6 e 100 caracteres'
+      },
+      confirmPassword: {
+        required: 'Informe a senha novamente',
+        rangeLength: 'A senha deve possuir entre 6 e 100 caracteres',
+        equalTo: 'As senhas não conferem'
+      },
       profissao: {
         required: 'Informe a sua profissão'
       },
@@ -114,13 +113,13 @@ export class AuthPageComponent implements OnInit, AfterViewInit {
       }
     };
 
-    this.genericValidator = new GenericValidator(this.validationMessages);
+    super.configurarMensagensValidacaoBase(this.validationMessages);
   }
 
   ngOnInit() {
     let password = new FormControl('', [Validators.required, CustomValidators.rangeLength([6, 15])]);
-		let confirmPassword = new FormControl('', [Validators.required, CustomValidators.rangeLength([6, 15]), CustomValidators.equalTo(password)]);
-    let numeroRegistroValido = new FormControl('', [Validators.required, CustomValidators.rangeLength([1, 18]),CustomValidators.number]);
+    let confirmPassword = new FormControl('', [Validators.required, CustomValidators.rangeLength([6, 15]), CustomValidators.equalTo(password)]);
+    let numeroRegistroValido = new FormControl('', [Validators.required, CustomValidators.rangeLength([1, 18]), CustomValidators.number]);
 
     this.usuarioForm = this._formBuilder.group({
       name: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(150)]],
@@ -144,25 +143,20 @@ export class AuthPageComponent implements OnInit, AfterViewInit {
           bairro: ['', [Validators.required]],
           cep: ['', [Validators.required, NgBrazilValidators.cep]],
           cidade: ['', [Validators.required]],
-          estado: ['', [Validators.required]]})
+          estado: ['', [Validators.required]]
+        })
       })
     });
 
   }
 
   ngAfterViewInit(): void {
-		let controlBlurs: Observable<any>[] = this.formInputElements
-		.map((formControl: ElementRef) => fromEvent(formControl.nativeElement, 'blur'));
-
-		merge(...controlBlurs).subscribe(() => {
-			this.displayMessage = this.genericValidator.processarMensagens(this.usuarioForm);
-			this.mudancasNaoSalvas = true;
-		});
-	}
+    super.configurarValidacaoFormularioBase(this.formInputElements, this.usuarioForm);
+  }
 
   buscarCep(cep: string) {
     cep = StringUtils.somenteNumeros(cep);
-    if(cep.length < 8) return;
+    if (cep.length < 8) return;
 
     this.userService.consultarCep(cep)
       .subscribe(
@@ -173,7 +167,7 @@ export class AuthPageComponent implements OnInit, AfterViewInit {
 
   preencherEnderecoConsulta(cepConsulta: CepConsulta) {
     this.usuarioForm.patchValue({
-      dadosProfissionais:{
+      dadosProfissionais: {
         localidade: {
           logradouro: cepConsulta.logradouro,
           bairro: cepConsulta.bairro,
@@ -187,35 +181,32 @@ export class AuthPageComponent implements OnInit, AfterViewInit {
   }
 
   adicionarUsuario() {
-		if (this.usuarioForm.dirty && this.usuarioForm.valid) {
+    if (this.usuarioForm.dirty && this.usuarioForm.valid) {
 
-			this.usuario = Object.assign({}, this.usuario, this.usuarioForm.value);
-      this.formResult = JSON.stringify(this.usuarioForm.value);
-      this.mudancasNaoSalvas = false;
+      this.usuario = Object.assign({}, this.usuario, this.usuarioForm.value);
 
       this.usuario.dadosProfissionais.localidade.cep = StringUtils.somenteNumeros(this.usuario.dadosProfissionais.localidade.cep);
-
       this.usuario.dadosProfissionais.areaAtuacao = parseInt(this.usuario.dadosProfissionais.areaAtuacao.toString());
 
       this.userService.registrarUsuario(this.usuario).subscribe(
         sucesso => { this.processarSucesso(sucesso) },
-        falha => { this.processarSucesso(falha) }
+        falha => { this.processarFalha(falha) }
       );
 
-		} else {
-			this.formResult = "Não submeteu!!!"
-		}
-	}
+      this.formResult = JSON.stringify(this.usuarioForm.value);
+      this.mudancasNaoSalvas = false;
+    }
+  }
 
   processarSucesso(response: any) {
-    this.usuarioForm.reset();
+    this.usuarioForm.reset(); 
     this.errors = [];
     this.userService.LocalStorage.salvarDadosLocaisUsuario(response);
 
     this.mudancasNaoSalvas = false;
 
     let toastr = this.toastr.success('Cadastro efetuado com Sucesso.', 'Seja bem vindo :D');
-    if(toastr) {
+    if (toastr) {
       toastr.onHidden.subscribe(() => {
         this.router.navigate(['/home']);
       });
@@ -225,6 +216,7 @@ export class AuthPageComponent implements OnInit, AfterViewInit {
   processarFalha(fail: any) {
     this.errors = fail.error.errors;
     this.toastr.error('Ocorreu um erro !!!', 'Eita :O');
+    console.log('ERROSSSSSS: ', this.errors)
   }
 
 

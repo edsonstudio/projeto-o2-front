@@ -1,6 +1,6 @@
 import { Localidade } from './localidade';
 
-export class Usuario {
+export interface Usuario {
   id: string;
   name: string;
   phoneNumber: string;

@@ -1,7 +1,8 @@
-import { HttpErrorResponse, HttpHeaders } from '@angular/common/http';
-import { throwError } from 'rxjs';
-import { environment } from './../../environments/environment.prod';
-import { LocalStorageUtils } from './../utils/localstorage';
+import { LocalStorageUtils } from '../utils/localstorage';
+import { HttpErrorResponse, HttpHeaders } from "@angular/common/http";
+import { throwError } from "rxjs";
+import { environment } from 'src/environments/environment';
+
 export abstract class BaseService {
 
   public LocalStorage = new LocalStorageUtils();
@@ -24,17 +25,19 @@ export abstract class BaseService {
     };
   }
 
-  protected ExtractData(response: any) {
+
+  protected extractData(response: any) {
     return response.data || {};
   }
 
-  protected ServiceError(response: Response | any) {
+  protected serviceError(response: Response | any) {
     let customError: string[] = [];
 
-    if(response instanceof HttpErrorResponse) {
+    if (response instanceof HttpErrorResponse) {
 
-      if(response.statusText === "Unknown Error") {
+      if (response.statusText === "Unknown Error") {
         customError.push("Ocorreu um erro desconhecido");
+        response.error.errors = customError;
       }
     }
 

@@ -9,36 +9,34 @@ import { catchError, map } from "rxjs/operators";
 @Injectable()
 export class UserService extends BaseService {
 
-  usuario: Usuario = new Usuario();
-
-  constructor(private http: HttpClient) { super() }
+  constructor(private http: HttpClient) { super(); }
 
   consultarCep(cep: string): Observable<CepConsulta> {
     return this.http
       .get<CepConsulta>(`https://viacep.com.br/ws/${cep}/json/`)
-      .pipe(catchError(super.ServiceError))
+      .pipe(catchError(super.serviceError))
   }
 
   obterTodos(): Observable<Usuario[]> {
     return this.http
       .get<Usuario[]>(this.UrlServiceV1 + "usuarios")
-      .pipe(catchError(super.ServiceError));
+      .pipe(catchError(super.serviceError));
   }
 
   registrarUsuario(usuario: Usuario): Observable<Usuario> {
     return this.http
       .post(this.UrlServiceV1 + "registrar", usuario, this.ObterHeaderJson())
       .pipe(
-        map(super.ExtractData),
-        catchError(super.ServiceError));
+        map(super.extractData),
+        catchError(super.serviceError));
   }
 
   login(usuario: Usuario): Observable<Usuario> {
     return this.http
       .post(this.UrlServiceV1 + "login", usuario, this.ObterHeaderJson())
       .pipe(
-        map(super.ExtractData),
-        catchError(super.ServiceError));
+        map(super.extractData),
+        catchError(super.serviceError));
   }
 
 }
