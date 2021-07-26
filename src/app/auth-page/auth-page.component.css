@@ -70,12 +70,3 @@
   align-content: center;
   align-items: center;
 }
-
-.alert {
-  background-color: #f44336;
-  color: #FFF;
-  font-weight: 600;
-  padding: 1.25rem;
-  margin: 10px 0px;
-  border-radius: 5px;
-}

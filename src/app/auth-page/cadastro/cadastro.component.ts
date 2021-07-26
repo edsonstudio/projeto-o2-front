@@ -211,6 +211,5 @@ export class CadastroComponent extends FormBaseComponent implements OnInit, Afte
   processarFalha(fail: any) {
     this.errors = fail.error.errors;
     this.toastr.error('Ocorreu um erro !!!', 'Eita :O');
-    console.log('ERROSSSSSS: ', this.errors)
   }
 }

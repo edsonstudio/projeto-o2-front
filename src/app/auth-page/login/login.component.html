@@ -1,18 +1,40 @@
-<mat-form-field class="example-full-width">
-  <mat-label>E-mail</mat-label>
-  <input matInput type="email" placeholder="exemplo@exemplo.com">
-  <button mat-icon-button matSuffix>
-    <mat-icon>alternate_email</mat-icon>
-  </button>
-</mat-form-field>
+<form (ngSubmit)="login()" [formGroup]="loginForm">
+  <mat-form-field class="example-full-width">
+    <mat-label>E-mail</mat-label>
+    <input matInput type="email" formControlName="email" placeholder="Digite o seu email" required>
+    <button mat-icon-button matSuffix>
+      <mat-icon>alternate_email</mat-icon>
+    </button>
+    <mat-hint>*Campo obrigatório</mat-hint>
+    <mat-error *ngIf="displayMessage.email">
+      <p [innerHTML]="displayMessage.email"></p>
+    </mat-error>
+  </mat-form-field>
 
-<mat-form-field class="example-full-width">
-  <mat-label>Senha</mat-label>
-  <input matInput [type]="hide ? 'password' : 'text'">
-  <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
-    [attr.aria-pressed]="hide">
-    <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-  </button>
-</mat-form-field>
+  <mat-form-field class="example-full-width">
+    <mat-label>Senha</mat-label>
+    <input matInput [type]="hide ? 'password' : 'text'" formControlName="password">
+    <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+      [attr.aria-pressed]="hide">
+      <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+    </button>
+    <mat-hint>*Campo obrigatório</mat-hint>
+    <mat-error *ngIf="displayMessage.password">
+      <p [innerHTML]="displayMessage.password"></p>
+    </mat-error>
+  </mat-form-field>
 
-<button mat-raised-button color="primary">Entrar</button>
+  <div class="botoes">
+    <br><br>
+    <button mat-raised-button color="primary" id="Login" [disabled]="!loginForm.valid" type="submit">Entrar</button>
+    <br>
+    <div class="alert" *ngIf="errors.length > 0">
+      <h3 id="msgRetorno">Opa! Alguma coisa não deu certo:</h3>
+      <ul>
+        <li *ngFor="let error of errors">{{ error }}</li>
+      </ul>
+    </div>
+    <div>
+    </div>
+  </div>
+</form>
