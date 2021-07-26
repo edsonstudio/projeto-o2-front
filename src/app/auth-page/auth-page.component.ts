@@ -80,7 +80,8 @@ export class AuthPageComponent implements OnInit, AfterViewInit {
       },
       numeroRegistro: {
         required: 'Informe o seu número de registro',
-        rangeLength: 'O número de registro deve possuir entre 1 e 18 caracteres'
+        rangeLength: 'O número de registro deve possuir entre 1 e 18 caracteres',
+        number: 'Você deve informar apenas números'
       },
       areaAtuacao: {
         required: 'Informe a sua área de atuação'
@@ -115,6 +116,7 @@ export class AuthPageComponent implements OnInit, AfterViewInit {
   ngOnInit() {
     let password = new FormControl('', [Validators.required, CustomValidators.rangeLength([6, 15])]);
 		let confirmPassword = new FormControl('', [Validators.required, CustomValidators.rangeLength([6, 15]), CustomValidators.equalTo(password)]);
+    let numeroRegistroValido = new FormControl('', [Validators.required, CustomValidators.rangeLength([1, 18]),CustomValidators.number]);
 
     this.usuarioForm = this._formBuilder.group({
       name: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(150)]],
@@ -127,7 +129,7 @@ export class AuthPageComponent implements OnInit, AfterViewInit {
 
       dadosProfissionais: this._formBuilder.group({
         profissao: ['', Validators.required],
-        numeroRegistro: ['', [Validators.required, CustomValidators.rangeLength([1, 18])]],
+        numeroRegistro: numeroRegistroValido,
         areaAtuacao: ['', Validators.required],
         deslocamentoMaximo: ['', Validators.required],
 
