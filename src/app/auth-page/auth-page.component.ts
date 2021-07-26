@@ -1,4 +1,4 @@
-import { UserService } from './services/user.service';
+import { AuthService } from './services/auth.service';
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChildren } from '@angular/core';
 import { FormBuilder, Validators, FormGroup, FormControlName, FormControl } from '@angular/forms';
 import { MASKS, NgBrazilValidators } from 'ng-brazil';
@@ -40,7 +40,7 @@ export class AuthPageComponent extends FormBaseComponent implements OnInit, Afte
   errors: any[] = [];
 
   constructor(private _formBuilder: FormBuilder,
-    private userService: UserService,
+    private authService: AuthService,
     private router: Router,
     private toastr: ToastrService) {
 
@@ -158,7 +158,7 @@ export class AuthPageComponent extends FormBaseComponent implements OnInit, Afte
     cep = StringUtils.somenteNumeros(cep);
     if (cep.length < 8) return;
 
-    this.userService.consultarCep(cep)
+    this.authService.consultarCep(cep)
       .subscribe(
         cepRetorno => this.preencherEnderecoConsulta(cepRetorno),
         erro => this.errors.push(erro)
@@ -188,7 +188,7 @@ export class AuthPageComponent extends FormBaseComponent implements OnInit, Afte
       this.usuario.dadosProfissionais.localidade.cep = StringUtils.somenteNumeros(this.usuario.dadosProfissionais.localidade.cep);
       this.usuario.dadosProfissionais.areaAtuacao = parseInt(this.usuario.dadosProfissionais.areaAtuacao.toString());
 
-      this.userService.registrarUsuario(this.usuario).subscribe(
+      this.authService.registrarUsuario(this.usuario).subscribe(
         sucesso => { this.processarSucesso(sucesso) },
         falha => { this.processarFalha(falha) }
       );
@@ -199,9 +199,9 @@ export class AuthPageComponent extends FormBaseComponent implements OnInit, Afte
   }
 
   processarSucesso(response: any) {
-    this.usuarioForm.reset(); 
+    this.usuarioForm.reset();
     this.errors = [];
-    this.userService.LocalStorage.salvarDadosLocaisUsuario(response);
+    this.authService.LocalStorage.salvarDadosLocaisUsuario(response);
 
     this.mudancasNaoSalvas = false;
 

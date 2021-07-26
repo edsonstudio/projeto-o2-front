@@ -1,4 +1,4 @@
-import { Usuario } from './../models/usuario';
+import { Usuario } from '../models/usuario';
 import { Injectable } from "@angular/core";
 import { HttpClient } from '@angular/common/http';
 import { BaseService } from 'src/app/services/base.service';
@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 import { catchError, map } from "rxjs/operators";
 
 @Injectable()
-export class UserService extends BaseService {
+export class AuthService extends BaseService {
 
   constructor(private http: HttpClient) { super(); }
 
