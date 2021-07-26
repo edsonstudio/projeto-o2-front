@@ -196,7 +196,6 @@ export class AuthPageComponent implements OnInit, AfterViewInit {
       this.usuario.dadosProfissionais.localidade.cep = StringUtils.somenteNumeros(this.usuario.dadosProfissionais.localidade.cep);
 
       this.usuario.dadosProfissionais.areaAtuacao = parseInt(this.usuario.dadosProfissionais.areaAtuacao.toString());
-      this.usuario.dadosProfissionais.numeroRegistro = parseInt(this.usuario.dadosProfissionais.numeroRegistro.toString());
 
       this.userService.registrarUsuario(this.usuario).subscribe(
         sucesso => { this.processarSucesso(sucesso) },
@@ -212,6 +211,8 @@ export class AuthPageComponent implements OnInit, AfterViewInit {
     this.usuarioForm.reset();
     this.errors = [];
     this.userService.LocalStorage.salvarDadosLocaisUsuario(response);
+
+    this.mudancasNaoSalvas = false;
 
     let toastr = this.toastr.success('Cadastro efetuado com Sucesso.', 'Seja bem vindo :D');
     if(toastr) {

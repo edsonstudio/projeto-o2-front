@@ -27,11 +27,11 @@
 
 .mat-raised-button {
   margin-top: 10px;
-  width: 52%;
+  width: 100%;
 }
 
 .menor{
-  width: 30%;
+  width: 50%;
   margin: 10px;
 }
 
@@ -61,4 +61,21 @@
 
 .mat-stepper-vertical {
   margin-top: 8px;
+}
+
+.botoes {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-content: center;
+  align-items: center;
+}
+
+.alert {
+  background-color: #f44336;
+  color: #FFF;
+  font-weight: 900;
+  padding: 1.25rem;
+  margin: 10px 0px;
+  border-radius: 5px;
 }

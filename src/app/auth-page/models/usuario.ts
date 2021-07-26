@@ -15,7 +15,7 @@ export class Usuario {
 export class DadosProfissionais {
   id: string;
   profissao: string;
-  numeroRegistro: number;
+  numeroRegistro: string;
   areaAtuacao: number;
   deslocamentoMaximo: string;
   userId: string;

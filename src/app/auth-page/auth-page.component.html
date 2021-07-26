@@ -34,8 +34,8 @@
         <mat-tab label="Cadastro">
           <form (ngSubmit)='adicionarUsuario()' [formGroup]="usuarioForm">
 
-          <div class="example-table-container">
-            <mat-vertical-stepper [linear]="isLinear" #stepper>
+            <div class="example-table-container">
+              <mat-vertical-stepper [linear]="isLinear" #stepper>
                 <!-----------------------------------------------Dados Pessoais----------------------------------------------->
                 <mat-step [stepControl]="usuarioForm" [editable]="isEditable">
                   <form [formGroup]="usuarioForm">
@@ -121,7 +121,7 @@
                     </mat-form-field>
                     <br><br>
 
-                    <div>
+                    <div class="botoes">
                       <button button mat-raised-button color="primary" matStepperNext>Próximo</button>
                     </div>
                   </form>
@@ -177,96 +177,118 @@
                       </mat-error>
                     </mat-form-field>
 
-                    <div>
+                    <div class="botoes">
                       <button class="menor" mat-raised-button matStepperPrevious>Voltar</button>
                       <button class="menor" mat-raised-button color="primary" matStepperNext>Próximo</button>
                     </div>
 
                     <!-- ---------------------------------------------Localidade--------------------------------------------->
-                <mat-step [stepControl]="localidade" [editable]="isEditable">
-                  <div formGroupName="localidade">
-                    <ng-template matStepLabel>Localidade</ng-template>
+                    <mat-step [stepControl]="localidade" [editable]="isEditable">
+                      <div formGroupName="localidade">
+                        <ng-template matStepLabel>Localidade</ng-template>
 
-                    <mat-form-field class="example-full-width">
-                      <mat-label>CEP</mat-label>
-                      <input matInput formControlName="cep" (blur)="buscarCep($event.target.value)" cep
-                        [textMask]="{mask: MASKS.cep.textMask}" placeholder="Digite o seu CEP" required>
-                      <mat-hint>*Campo obrigatório</mat-hint>
-                      <mat-error *ngIf="displayMessage.cep">
-                        <p [innerHTML]="displayMessage.cep"></p>
-                      </mat-error>
-                    </mat-form-field>
+                        <mat-form-field class="example-full-width">
+                          <mat-label>CEP</mat-label>
+                          <input matInput formControlName="cep" (blur)="buscarCep($event.target.value)" cep
+                            [textMask]="{mask: MASKS.cep.textMask}" placeholder="Digite o seu CEP" required>
+                          <mat-hint>*Campo obrigatório</mat-hint>
+                          <mat-error *ngIf="displayMessage.cep">
+                            <p [innerHTML]="displayMessage.cep"></p>
+                          </mat-error>
+                        </mat-form-field>
 
-                    <mat-form-field class="example-full-width">
-                      <mat-label>Logradouro</mat-label>
-                      <input matInput formControlName="logradouro" placeholder="Digite o seu logradouro" required>
-                      <mat-hint>*Campo obrigatório</mat-hint>
-                      <mat-error *ngIf="displayMessage.logradouro">
-                        <p [innerHTML]="displayMessage.logradouro"></p>
-                      </mat-error>
-                    </mat-form-field>
+                        <mat-form-field class="example-full-width">
+                          <mat-label>Logradouro</mat-label>
+                          <input matInput formControlName="logradouro" placeholder="Digite o seu logradouro" required>
+                          <mat-hint>*Campo obrigatório</mat-hint>
+                          <mat-error *ngIf="displayMessage.logradouro">
+                            <p [innerHTML]="displayMessage.logradouro"></p>
+                          </mat-error>
+                        </mat-form-field>
 
-                    <mat-form-field class="example-full-width">
-                      <mat-label>Número</mat-label>
-                      <input matInput formControlName="numero" placeholder="Digite o número" required>
-                      <mat-hint>*Campo obrigatório</mat-hint>
-                      <mat-error *ngIf="displayMessage.numero">
-                        <p [innerHTML]="displayMessage.numero"></p>
-                      </mat-error>
-                    </mat-form-field>
+                        <mat-form-field class="example-full-width">
+                          <mat-label>Número</mat-label>
+                          <input matInput formControlName="numero" placeholder="Digite o número" required>
+                          <mat-hint>*Campo obrigatório</mat-hint>
+                          <mat-error *ngIf="displayMessage.numero">
+                            <p [innerHTML]="displayMessage.numero"></p>
+                          </mat-error>
+                        </mat-form-field>
 
-                    <mat-form-field class="example-full-width">
-                      <mat-label>Complemento</mat-label>
-                      <input matInput formControlName="complemento" placeholder="Digite o complemento">
-                    </mat-form-field>
+                        <mat-form-field class="example-full-width">
+                          <mat-label>Complemento</mat-label>
+                          <input matInput formControlName="complemento" placeholder="Digite o complemento">
+                        </mat-form-field>
 
-                    <mat-form-field class="example-full-width">
-                      <mat-label>Bairro</mat-label>
-                      <input matInput formControlName="bairro" placeholder="Digite o seu bairro" required>
-                      <mat-hint>*Campo obrigatório</mat-hint>
-                      <mat-error *ngIf="displayMessage.bairro">
-                        <p [innerHTML]="displayMessage.bairro"></p>
-                      </mat-error>
-                    </mat-form-field>
+                        <mat-form-field class="example-full-width">
+                          <mat-label>Bairro</mat-label>
+                          <input matInput formControlName="bairro" placeholder="Digite o seu bairro" required>
+                          <mat-hint>*Campo obrigatório</mat-hint>
+                          <mat-error *ngIf="displayMessage.bairro">
+                            <p [innerHTML]="displayMessage.bairro"></p>
+                          </mat-error>
+                        </mat-form-field>
 
-                    <mat-form-field class="example-full-width">
-                      <mat-label>Cidade</mat-label>
-                      <input matInput formControlName="cidade" placeholder="Digite a sua cidade" required>
-                      <mat-hint>*Campo obrigatório</mat-hint>
-                      <mat-error *ngIf="displayMessage.cidade">
-                        <p [innerHTML]="displayMessage.cidade"></p>
-                      </mat-error>
-                    </mat-form-field>
+                        <mat-form-field class="example-full-width">
+                          <mat-label>Cidade</mat-label>
+                          <input matInput formControlName="cidade" placeholder="Digite a sua cidade" required>
+                          <mat-hint>*Campo obrigatório</mat-hint>
+                          <mat-error *ngIf="displayMessage.cidade">
+                            <p [innerHTML]="displayMessage.cidade"></p>
+                          </mat-error>
+                        </mat-form-field>
 
-                    <mat-form-field class="example-full-width">
-                      <mat-label>Estado</mat-label>
-                      <input matInput formControlName="estado" placeholder="Digite o seu estado" required>
-                      <mat-hint>*Campo obrigatório</mat-hint>
-                      <mat-error *ngIf="displayMessage.estado">
-                        <p [innerHTML]="displayMessage.estado"></p>
-                      </mat-error>
-                    </mat-form-field>
+                        <mat-form-field class="example-full-width">
+                          <mat-label>Estado</mat-label>
+                          <input matInput formControlName="estado" placeholder="Digite o seu estado" required>
+                          <mat-hint>*Campo obrigatório</mat-hint>
+                          <mat-error *ngIf="displayMessage.estado">
+                            <p [innerHTML]="displayMessage.estado"></p>
+                          </mat-error>
+                        </mat-form-field>
 
-                    <div>
-                      <button class="menor" mat-raised-button matStepperPrevious>Voltar</button>
-                      <button class="menor" mat-raised-button color="primary" matStepperNext>Próximo</button>
-                    </div>
-                  </div>
-                </mat-step>
+                        <div class="botoes">
+                          <br><br>
+                          <button mat-raised-button color="primary" [disabled]="!usuarioForm.valid"
+                            type="submit">Registrar</button>
+                          <br>
+                          <button class="menor" mat-raised-button matStepperPrevious>Voltar</button>
+                          <button class="menor" mat-raised-button color="warn" (click)="stepper.reset()">Resetar</button>
+                        </div>
+                        <div class="alert" *ngIf="errors.length > 0">
+                          <h3 id="msgRetorno">Opa! Alguma coisa não deu certo:</h3>
+                          <ul>
+                            <li *ngFor="let error of errors">{{ error }}</li>
+                          </ul>
+                        </div>
+                        <div>
+                          <p>Formulario valido: {{ usuarioForm.valid }}</p>
+                          <p>Formulario tocado: {{ usuarioForm.touched }}</p>
+                          <p>Formulario sujo: {{ usuarioForm.dirty }}</p>
+                          <p>Formulario: {{ formResult }}</p>
+                        </div>
+                      </div>
+                    </mat-step>
 
                   </div>
                 </mat-step>
 
                 <!-----------------------------------------------Concluir----------------------------------------------->
-                <mat-step>
+                <!-- <mat-step>
                   <ng-template matStepLabel>Concluir</ng-template>
 
-                  <div>
+                  <div class="botoes">
                     <button class="menor" mat-raised-button matStepperPrevious>Voltar</button>
                     <button class="menor" mat-raised-button color="warn" (click)="stepper.reset()">Resetar</button>
                     <br>
                     <button mat-raised-button color="primary" [disabled]="!usuarioForm.valid"
-                    type="submit">Registrar</button>
+                      type="submit">Registrar</button>
+                  </div>
+                  <div class="alert alert-danger" *ngIf="errors.length > 0">
+                    <h3 id="msgRetorno">Opa! Alguma coisa não deu certo:</h3>
+                    <ul>
+                      <li *ngFor="let error of errors">{{ error }}</li>
+                    </ul>
                   </div>
                   <div>
                     <p>Formulario valido: {{ usuarioForm.valid }}</p>
@@ -274,7 +296,7 @@
                     <p>Formulario sujo: {{ usuarioForm.dirty }}</p>
                     <p>Formulario: {{ formResult }}</p>
                   </div>
-                </mat-step>
+                </mat-step> -->
               </mat-vertical-stepper>
             </div>
           </form>
