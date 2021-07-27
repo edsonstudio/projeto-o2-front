@@ -69,7 +69,7 @@ export class LoginComponent extends FormBaseComponent implements OnInit, AfterVi
     this.errors = [];
     this.authService.LocalStorage.salvarDadosLocaisUsuario(response);
 
-    let toastr = this.toastr.success('Cadastro efetuado com Sucesso.', 'Seja bem vindo :D');
+    let toastr = this.toastr.success('Login efetuado com Sucesso.', 'Seja bem vindo :D');
     if (toastr) {
       toastr.onHidden.subscribe(() => {
         this.router.navigate(['/home']);

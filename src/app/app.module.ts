@@ -6,6 +6,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 // ---------------Sub-modules---------------
 import { AppRoutingModule } from './app-routing.module';
 import { AuthPageModule } from './auth-page/auth-page.module';
+import { NavegacaoModule } from './navegacao/navegacao.module';
 
 // ---------------Services---------------
 
@@ -24,6 +25,7 @@ import { ToastrModule } from 'ngx-toastr';
   ],
   imports: [
     AuthPageModule,
+    NavegacaoModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
